@@ -20,7 +20,6 @@ model = tvm.VisionTransformer(
 )
 
 # NOTE: future revision will support Conv2d and LayerNorm for LoRA
-# TODO: unittest for replica layer
 only_linear = True
 mode = "ddp"
 
@@ -29,7 +28,7 @@ lte.misc.use_custom_attention(model)
 
 # Parameters are ignored in LTE so for exact behavior use fixed position embedding
 # or modifiy the existing codebase to ensure gradients does not flow-between each other.
-# In practice it does not seem to matter and simply disabling gradient is enough.
+# We added sinusoidal embedding in lte.misc.position for vision models.
 model.encoder.pos_embedding.requires_grad = False
 model.class_token.requires_grad = False
 
