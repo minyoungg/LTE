@@ -1,7 +1,7 @@
 # LTE: LoRA-the-Explorer
 
 <a href="https://minyoungg.github.io/lte/">LoRA-the-explorer (LTE)</a> is a framework to fine-tune and pre-train models without directly optimizing over the main weights.
-This codebase provides the tools for small- to mid-scale research development.
+This is a minimal re-implementation of the codebase with tools for small- to mid-scale research development.
 
 
 ## Installation
