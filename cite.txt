@@ -1,0 +1,5 @@
+@article{huh2024lte,
+  title={Training Neural Networks from Scratch with Parallel Low-Rank Adapters},
+  author={Huh, Minyoung and Cheung, Brian and Bernstein, Jeremy and Agrawal, Pulkit and Isola, Phillip},
+  journal={arXiv preprint},
+}

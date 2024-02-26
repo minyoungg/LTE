@@ -1,0 +1,481 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="https://kit.fontawesome.com/2713e85d23.js" crossorigin="anonymous"></script>
+
+    <!--
+  <script src="./resources/jsapi" type="text/javascript"></script>
+  <script type="text/javascript" async>google.load("jquery", "1.3.2");</script>
+ -->
+
+<!-- @font-face {
+font-family: 'Avenir Book';
+src: url("./fonts/Avenir_Book.ttf");
+/* File to be stored at your site */
+} -->
+
+    <style type="text/css">
+
+        body {
+            font-family: "Avenir Book", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            font-weight: 300;
+            font-size: 14px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 800px;
+        }
+
+        h1 {
+            font-weight: 300;
+        }
+
+        h2 {
+            font-weight: 300;
+        }
+
+        p {
+            font-weight: 300;
+            line-height: 1.4;
+        }
+
+        code {
+            font-size: 0.8rem;
+            margin: 0 0.2rem;
+            padding: 0.5rem 0.8rem;
+            white-space: nowrap;
+            background: #efefef;
+            border: 1px solid #d3d3d3;
+            color: #000000;
+            border-radius: 3px;
+        }
+
+        pre>code {
+            display: block;
+            white-space: pre;
+            line-height: 1.5;
+            padding: 0;
+            margin: 0;
+        }
+
+        pre.prettyprint>code {
+            border: none;
+        }
+
+
+
+        .disclaimerbox {
+            background-color: #eee;
+            border: 1px solid #eeeeee;
+            border-radius: 10px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            padding: 20px;
+        }
+
+        video.header-vid {
+            height: 140px;
+            border: 1px solid black;
+            border-radius: 10px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+        }
+
+        img.header-img {
+            height: 140px;
+            border: 1px solid black;
+            border-radius: 10px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+        }
+
+        img.rounded {
+            border: 0px solid #eeeeee;
+            border-radius: 10px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+
+        }
+
+        a:link,
+        a:visited {
+            color: #1367a7;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #208799;
+        }
+
+        td.dl-link {
+            height: 160px;
+            text-align: center;
+            font-size: 22px;
+        }
+
+        .layered-paper-big {
+            /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+            box-shadow:
+                0px 0px 1px 1px rgba(0, 0, 0, 0.35),
+                /* The top layer shadow */
+                5px 5px 0 0px #fff,
+                /* The second layer */
+                5px 5px 1px 1px rgba(0, 0, 0, 0.35),
+                /* The second layer shadow */
+                10px 10px 0 0px #fff,
+                /* The third layer */
+                10px 10px 1px 1px rgba(0, 0, 0, 0.35),
+                /* The third layer shadow */
+                15px 15px 0 0px #fff,
+                /* The fourth layer */
+                15px 15px 1px 1px rgba(0, 0, 0, 0.35),
+                /* The fourth layer shadow */
+                20px 20px 0 0px #fff,
+                /* The fifth layer */
+                20px 20px 1px 1px rgba(0, 0, 0, 0.35),
+                /* The fifth layer shadow */
+                25px 25px 0 0px #fff,
+                /* The fifth layer */
+                25px 25px 1px 1px rgba(0, 0, 0, 0.35);
+            /* The fifth layer shadow */
+            margin-left: 10px;
+            margin-right: 45px;
+        }
+
+
+        .layered-paper {
+            /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+            box-shadow:
+                0px 0px 1px 1px rgba(0, 0, 0, 0.35),
+                /* The top layer shadow */
+                5px 5px 0 0px #fff,
+                /* The second layer */
+                5px 5px 1px 1px rgba(0, 0, 0, 0.35),
+                /* The second layer shadow */
+                10px 10px 0 0px #fff,
+                /* The third layer */
+                10px 10px 1px 1px rgba(0, 0, 0, 0.35);
+            /* The third layer shadow */
+            margin-top: 5px;
+            margin-left: 10px;
+            margin-right: 30px;
+            margin-bottom: 5px;
+        }
+
+        .vert-cent {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+        }
+    </style>
+
+
+
+    <title>LTE</title>
+</head>
+
+<body>
+    <br>
+    <center>
+        <span style="font-size:26px">Training Neural Networks From Scratch<br>
+        with Parallel Low-Rank Adapters</span><br><br><br>
+    </center>
+    <table align="center" width="800px">
+        <tbody>
+            <tr>
+                <td align="center" width="160px">
+                    <center>
+                        <span style="font-size:16px"><a href="http://minyounghuh.com">Minyoung
+                                Huh</a><sup>1</sup></span>
+                    </center>
+                </td>
+                <td align="center" width="160px">
+                    <center>
+                        <span style="font-size:16px"><a
+                                href="https://scholar.google.com/citations?user=7N-ethYAAAAJ&hl=en">Brian
+                                Cheung</a><sup>1 2</sup></span>
+                    </center>
+                </td>
+                <td align="center" width="160px">
+                    <center>
+                        <span style="font-size:16px"><a
+                                href="https://jeremybernste.in/">Jeremy Bernstein</a><sup>1</sup></span>
+                    </center>
+                </td>
+                <td align="center" width="160px">
+                    <center>
+                        <span style="font-size:16px"><a href="http://web.mit.edu/phillipi/">Phillip
+                            Isola</a><sup>1</sup></span>
+                        </center>
+                <td align="center" width="160px">
+                    <center>
+                        <span style="font-size:16px"><a href="https://people.csail.mit.edu/pulkitag/">Pulkit
+                                Agrawal</a><sup>1</sup></span>
+                    </center>
+                </td>
+            </tr>
+
+        </tbody>
+    </table><br>
+
+    <table align="center" width="700px">
+        <tbody>
+            <tr>
+                <td align="center" width="50px">
+                    <center>
+                        <span style="font-size:16px"></span>
+                    </center>
+                </td>
+                <td align="center" width="250px">
+                    <center>
+                        <span style="font-size:16px"><sup>1</sup>MIT CSAIL</span>
+                    </center>
+                </td>
+                <td align="center" width="250px">
+                    <center>
+                        <span style="font-size:16px"><sup>2</sup>MIT BCS</span>
+                    </center>
+                </td>
+                <td align="center" width="50px">
+                    <center>
+                        <span style="font-size:16px"></span>
+                    </center>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table align="center" width="700px">
+        <tbody>
+            <tr>
+                <td align="center" width="200px">
+                    <center>
+                        <br>
+                        <span style="font-size:20px">
+                            <a href=https://github.com/minyoungg/LTE>GitHub</a>
+                        </span>
+                    </center>
+                </td>
+
+                <td align="center" width="200px">
+                    <center>
+                        <br>
+                        <span style="font-size:20px">
+                            <a href="./assets/draft_022023.pdf">arXiv</a>
+                            <br />
+                        </span>
+                    </center>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <hr>
+    <p><center>
+      <img class="rounded" src="./assets/teaser.png" width="500px">
+    </center></p>
+    <center>
+        <h2>
+            Abstract
+        </h2>
+    </center>
+    <p>
+        <left>
+            The scalability of deep learning models is fundamentally limited by computing resources, memory, and communication.
+            Although methods like low-rank adaptation (LoRA) have reduced the cost of model finetuning,
+            its application in model pre-training remains largely unexplored.
+            This paper explores extending LoRA to model pre-training, identifying the inherent constraints and limitations of standard LoRA in this context.
+            We introduce LoRA-the-Explorer (LTE), a novel bi-level optimization algorithm designed to enable parallel training of multiple low-rank heads across computing nodes,
+            thereby reducing the need for frequent synchronization. Our approach includes extensive experimentation on vision transformers using various vision datasets,
+            demonstrating that LTE is competitive with standard pre-training.
+        </left>
+    </p>
+
+    <br>
+
+    <hr>
+    <center>
+        <h2> TLDR takeaways </h2>
+    </center>
+
+    <p>
+      Tremendous efforts have been made to enable large-scale model fine-tuning on memory-limited hardware devices using quantization
+      and adapters. Methods
+      such as <a href="https://arxiv.org/abs/2305.14314">QLoRA</a> have demonstrated the feasibility of fine-tuning a 7B LLM
+      with just 6GB of GPU memory.
+    </p>
+    <!-- <br /> -->
+    <p><center>
+      <img class="rounded" src="./assets/qlora.png" width="600px">
+    </center></p>
+    <!-- <br> -->
+    <center>
+        <p style="color: red;"><i class="fa-solid fa-angle-right"></i> But what about model pre-training? Can we leverage the memory-efficient algorithms when training from scratch? </p>
+    </center>
+    <p>
+        We demonstrate that it is possible to train with LoRA alone to match standard pre-training performance.
+        This enables training of much larger models using computing devices with fraction of the <b>memory and
+        communication cost</b>.
+    </p>
+
+    <p>Our method, <b>LoRA-the-Explorer (LTE)</b>, involves the following steps:</p>
+  <ul>
+      <li>Initialize each device with a unique set of LoRA parameters.</li>
+      <li>For each device, train on a different partition of the dataset using a local optimizer.</li>
+      <li>Every <i>T</i> iterations, communicate the LoRA parameters across devices (or to the parameter server).</li>
+      <li>Average the effective LoRA parameters to compute the update for the main parameters.</li>
+      <li>Communicate the updated main parameters back to the devices and repeat the process.</li>
+  </ul>
+  <p>This approach ensures that the LoRA parameters serve as individual "gradient" updates for the main set of weights. By doing so, it enables collaborative training of the model using LoRA adapters ... similar to an open source GitHub project :) </p>
+
+  <p>
+      <center>
+          <img class="rounded" src="./assets/lte-diagram.png" width="800px">
+      </center>
+  </p>
+
+
+    <hr>
+    <center>
+        <h2> Key observations </h2>
+    </center>
+    <p>
+    <b style="color: blue;">Observation 1</b>: Models trained with LoRA alone cannot fully recover pre-training performance. However, increasing the
+    rank r or employing a multi-head representation enables these models to achieve the desired performance levels.</p>
+    <p>
+        <center>
+            <img class="rounded" src="./assets/lora_comparison.png" width="500px">
+        </center>
+    </p>
+
+    <p>
+    <b style="color: blue;">Observation 2</b>: We empirically observe the effective rank of the gradients increases over time, which signals the inability to match performance with a single LoRA alone.</p>
+    <p>
+        <center>
+            <img class="rounded" src="./assets/erank.png" width="700px">
+        </center>
+    </p>
+
+
+    <br>
+    <p>
+      <b style="color: blue;">Observation 3</b>: Sequential merging, while a viable approach to recover the full-rank weight representation, is unable to recover the full-model pre-training performance in practice.
+        Suggesting the need for full-rank update iterates.</p>
+    </p>
+    <p>
+        <center>
+            <img class="rounded" src="./assets/merge_lora.png" width="500px">
+        </center>
+    </p>
+
+    <p>
+      <b style="color: blue;">Observation 4</b>: We demonstrate that parallel LoRA merging can precisely replicate the full-rank weight update.
+    Furthermore, we show that even with infrequent synchronization, our method remains effective for pre-training.</p>
+    <center> Various datasets on ViT-S-32</center>
+    <p>
+        <center>
+            <img class="rounded" src="./assets/vit_datasets.png" width="700px">
+        </center>
+    </p>
+
+    <center> ImageNet100 on ViT scales</center>
+    <p>
+        <center>
+            <img class="rounded" src="./assets/vit_scale.png" width="700px">
+        </center>
+    </p>
+
+    <center> ImageNet100 on MLP-Mixer scales</center>
+    <p>
+        <center>
+            <img class="rounded" src="./assets/mixer_scale.png" width="700px">
+        </center>
+    </p>
+
+    <p>
+      <b style="color: blue;">Observation 5</b>: Even when trained in parallel, LoRA heads maintain orthogonality throughout the training process.</p>
+        <center>
+            <img class="rounded" src="./assets/alignment.png" width="500px">
+        </center>
+    </p>
+    <br>
+    <hr>
+    <center>
+        <h2> Conclusion, limitations, and implications </h2>
+    </center>
+    <p>Our results suggest LTE is a competitive parameter-efficient framework for distributed training. We highlight several directions for further exploration:</p>
+    <ul>
+        <li>Improving convergence speed by integrating methods from federated learning and model averaging.</li>
+        <li>Creating adaptive mechanisms for determining the necessary number of ranks or heads.</li>
+        <li>Examining the feasibility of heterogeneous parameterization for LoRA, allowing each adapter to operate at a distinct rank.</li>
+        <li>Investigating strategies for integrating multi-level optimization (optimizer at both local- and meta-level)</li>
+    </ul>
+    <p>Our initial findings validate the potential of low-rank adapters in neural network training, marking a significant step forward. However, further testing on larger models is essential to test the scalability of our approach.
+    We believe our method opens up and contributes to many avenues:</p>
+    <ul>
+        <li><b>Collective Intelligence:</b> Distributed learning can lead to more efficient and scalable knowledge acquisition.</li>
+        <li><b>Personalized Learning:</b> Each LoRA can serve as a localized learning, tailoring models to individual user preferences. These preferences can be shared or used to update the base model. </li>
+        <li><b>User Safety and Privacy:</b> Localized training ensures user's data safety and privacy, as weight updates are the main communication medium.</li>
+        <li><b>Computational Efficiency:</b> Pre-training models in environments with limited computational resources or slow interconnect speeds.</li>
+    </ul>
+    <p>Through addressing these open questions, we hope to envision a collaborative ecosystem embodying the concept of the "wisdom of the crowd." </p>
+
+    <br>
+
+    <hr>
+    <h3 style="margin-top: -1.6em;text-align:left"></h3>
+
+
+    <div style="background: #FFF1E5; overflow: auto; width: auto; border: none; padding: 1em 1em 0.0em 1em; max-width: 100%; border-radius: 10px;">
+    <pre style="font-size: 10pt; margin: 0; text-align: left; white-space: pre-wrap; word-wrap: break-word;">
+      @article{huh2024lte,
+        title={Training Neural Networks from Scratch with Parallel Low-Rank Adapters},
+        author={Huh, Minyoung and Cheung, Brian and Bernstein, Jeremy
+                and Isola, Phillip and Agrawal, Pulkit},
+        journal={arXiv preprint},
+        year={2024}
+      }
+    </pre>
+    </div>
+
+
+
+
+
+    <hr>
+    <center>
+        <h2> Acknowledgements </h2>
+    </center>
+        <p> JH was supported by the ONR MURI grant N00014-22-1-2740 and the MIT-IBM Watson AI Lab.
+        JB was funded by the MIT-IBM Watson AI Lab and the Packard Fellowship.
+        PI was funded by the Packard Fellowship.
+        BC was funded by the NSF STC award CCF-1231216.
+        We thank Han Guo, Lucy Chai, Wei-Chiu Ma, Eunice Lee, Dave Epstein, and Yen-Chen Lin for their feedback and emotional support on the project. </p>
+        <br><br>
+
+        <br><br>
+        <a href="https://richzhang.github.io/colorization/">Website template edited from Colorful Colorization</a>.
+    </p>
+    <br>
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70157890-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-70157890-3');
+    </script>
+
+
+</body>
+
+</html>
