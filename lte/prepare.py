@@ -11,7 +11,6 @@ def prepare_model_for_lte(
         strict=True, 
         replica_layers=[],
         mode="ddp",
-        use_special_attention_scaling=True,
         ):
     """
     Convert a model into an LTE model.
@@ -37,7 +36,7 @@ def prepare_model_for_lte(
                 )
         )
     """
-    
+        
     if mode == "ddp":
         from lte.ddp.linear import MultiheadLoRALinear
     elif mode == "dmp":
@@ -86,15 +85,7 @@ def prepare_model_for_lte(
         else:
             if isinstance(m, nn.Linear):
                 device = next(old_module.parameters()).device
-                
-                if use_special_attention_scaling:
-                    if np.any([(k in n) for k in ['in_proj', 'q_proj', 'k_proj']]):
-                        # this will behave slightly different whether u split kqv since its applied to all kqv
-                        linear_lora_kwargs['lora_alpha'] = orig_linear_lora_alpha ** 0.5
-                    else:
-                        linear_lora_kwargs['lora_alpha'] = orig_linear_lora_alpha
-                
- 
+                                
                 new_module = MultiheadLoRALinear(
                     old_module.in_features,
                     old_module.out_features,
