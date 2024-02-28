@@ -9,14 +9,13 @@
   <script type="text/javascript" async>google.load("jquery", "1.3.2");</script>
  -->
 
-<!-- @font-face {
+    <!-- @font-face {
 font-family: 'Avenir Book';
 src: url("./fonts/Avenir_Book.ttf");
 /* File to be stored at your site */
 } -->
 
     <style type="text/css">
-
         body {
             font-family: "Avenir Book", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
             font-weight: 300;
@@ -184,7 +183,7 @@ src: url("./fonts/Avenir_Book.ttf");
     <br>
     <center>
         <span style="font-size:26px">Training Neural Networks From Scratch<br>
-        with Parallel Low-Rank Adapters</span><br><br><br>
+            with Parallel Low-Rank Adapters</span><br><br><br>
     </center>
     <table align="center" width="800px">
         <tbody>
@@ -204,15 +203,15 @@ src: url("./fonts/Avenir_Book.ttf");
                 </td>
                 <td align="center" width="160px">
                     <center>
-                        <span style="font-size:16px"><a
-                                href="https://jeremybernste.in/">Jeremy Bernstein</a><sup>1</sup></span>
+                        <span style="font-size:16px"><a href="https://jeremybernste.in/">Jeremy
+                                Bernstein</a><sup>1</sup></span>
                     </center>
                 </td>
                 <td align="center" width="160px">
                     <center>
                         <span style="font-size:16px"><a href="http://web.mit.edu/phillipi/">Phillip
-                            Isola</a><sup>1</sup></span>
-                        </center>
+                                Isola</a><sup>1</sup></span>
+                    </center>
                 <td align="center" width="160px">
                     <center>
                         <span style="font-size:16px"><a href="https://people.csail.mit.edu/pulkitag/">Pulkit
@@ -266,7 +265,7 @@ src: url("./fonts/Avenir_Book.ttf");
                     <center>
                         <br>
                         <span style="font-size:20px">
-                            <a href="./assets/draft_022023.pdf">arXiv</a>
+                            <a href="https://arxiv.org/abs/2402.16828">arXiv</a>
                             <br />
                         </span>
                     </center>
@@ -277,9 +276,11 @@ src: url("./fonts/Avenir_Book.ttf");
     </table>
     <br />
     <hr>
-    <p><center>
-      <img class="rounded" src="./assets/teaser.png" width="500px">
-    </center></p>
+    <p>
+        <center>
+            <img class="rounded" src="./assets/teaser.png" width="500px">
+        </center>
+    </p>
     <center>
         <h2>
             Abstract
@@ -287,12 +288,16 @@ src: url("./fonts/Avenir_Book.ttf");
     </center>
     <p>
         <left>
-            The scalability of deep learning models is fundamentally limited by computing resources, memory, and communication.
+            The scalability of deep learning models is fundamentally limited by computing resources, memory, and
+            communication.
             Although methods like low-rank adaptation (LoRA) have reduced the cost of model finetuning,
             its application in model pre-training remains largely unexplored.
-            This paper explores extending LoRA to model pre-training, identifying the inherent constraints and limitations of standard LoRA in this context.
-            We introduce LoRA-the-Explorer (LTE), a novel bi-level optimization algorithm designed to enable parallel training of multiple low-rank heads across computing nodes,
-            thereby reducing the need for frequent synchronization. Our approach includes extensive experimentation on vision transformers using various vision datasets,
+            This paper explores extending LoRA to model pre-training, identifying the inherent constraints and
+            limitations of standard LoRA in this context.
+            We introduce LoRA-the-Explorer (LTE), a novel bi-level optimization algorithm designed to enable parallel
+            training of multiple low-rank heads across computing nodes,
+            thereby reducing the need for frequent synchronization. Our approach includes extensive experimentation on
+            vision transformers using various vision datasets,
             demonstrating that LTE is competitive with standard pre-training.
         </left>
     </p>
@@ -305,40 +310,47 @@ src: url("./fonts/Avenir_Book.ttf");
     </center>
 
     <p>
-      Tremendous efforts have been made to enable large-scale model fine-tuning on memory-limited hardware devices using quantization
-      and adapters. Methods
-      such as <a href="https://arxiv.org/abs/2305.14314">QLoRA</a> have demonstrated the feasibility of fine-tuning a 7B LLM
-      with just 6GB of GPU memory.
+        Tremendous efforts have been made to enable large-scale model fine-tuning on memory-limited hardware devices
+        using quantization
+        and adapters. Methods
+        such as <a href="https://arxiv.org/abs/2305.14314">QLoRA</a> have demonstrated the feasibility of fine-tuning a
+        7B LLM
+        with just 6GB of GPU memory.
     </p>
     <!-- <br /> -->
-    <p><center>
-      <img class="rounded" src="./assets/qlora.png" width="600px">
-    </center></p>
+    <p>
+        <center>
+            <img class="rounded" src="./assets/qlora.png" width="600px">
+        </center>
+    </p>
     <!-- <br> -->
     <center>
-        <p style="color: red;"><i class="fa-solid fa-angle-right"></i> But what about model pre-training? Can we leverage the memory-efficient algorithms when training from scratch? </p>
+        <p style="color: red;"><i class="fa-solid fa-angle-right"></i> But what about model pre-training? Can we
+            leverage the memory-efficient algorithms when training from scratch? </p>
     </center>
     <p>
         We demonstrate that it is possible to train with LoRA alone to match standard pre-training performance.
         This enables training of much larger models using computing devices with fraction of the <b>memory and
-        communication cost</b>.
+            communication cost</b>.
     </p>
 
     <p>Our method, <b>LoRA-the-Explorer (LTE)</b>, involves the following steps:</p>
-  <ul>
-      <li>Initialize each device with a unique set of LoRA parameters.</li>
-      <li>For each device, train on a different partition of the dataset using a local optimizer.</li>
-      <li>Every <i>T</i> iterations, communicate the LoRA parameters across devices (or to the parameter server).</li>
-      <li>Average the effective LoRA parameters to compute the update for the main parameters.</li>
-      <li>Communicate the updated main parameters back to the devices and repeat the process.</li>
-  </ul>
-  <p>This approach ensures that the LoRA parameters serve as individual "gradient" updates for the main set of weights. By doing so, it enables collaborative training of the model using LoRA adapters ... similar to an open source GitHub project :) </p>
+    <ul>
+        <li>Initialize each device with a unique set of LoRA parameters.</li>
+        <li>For each device, train on a different partition of the dataset using a local optimizer.</li>
+        <li>Every <i>T</i> iterations, communicate the LoRA parameters across devices (or to the parameter server).</li>
+        <li>Average the effective LoRA parameters to compute the update for the main parameters.</li>
+        <li>Communicate the updated main parameters back to the devices and repeat the process.</li>
+    </ul>
+    <p>This approach ensures that the LoRA parameters serve as individual "gradient" updates for the main set of
+        weights. By doing so, it enables collaborative training of the model using LoRA adapters ... similar to an open
+        source GitHub project :) </p>
 
-  <p>
-      <center>
-          <img class="rounded" src="./assets/lte-diagram.png" width="800px">
-      </center>
-  </p>
+    <p>
+        <center>
+            <img class="rounded" src="./assets/lte-diagram.png" width="800px">
+        </center>
+    </p>
 
 
     <hr>
@@ -346,8 +358,10 @@ src: url("./fonts/Avenir_Book.ttf");
         <h2> Key observations </h2>
     </center>
     <p>
-    <b style="color: blue;">Observation 1</b>: Models trained with LoRA alone cannot fully recover pre-training performance. However, increasing the
-    rank r or employing a multi-head representation enables these models to achieve the desired performance levels.</p>
+        <b style="color: blue;">Observation 1</b>: Models trained with LoRA alone cannot fully recover pre-training
+        performance. However, increasing the
+        rank r or employing a multi-head representation enables these models to achieve the desired performance levels.
+    </p>
     <p>
         <center>
             <img class="rounded" src="./assets/lora_comparison.png" width="500px">
@@ -355,7 +369,9 @@ src: url("./fonts/Avenir_Book.ttf");
     </p>
 
     <p>
-    <b style="color: blue;">Observation 2</b>: We empirically observe the effective rank of the gradients increases over time, which signals the inability to match performance with a single LoRA alone.</p>
+        <b style="color: blue;">Observation 2</b>: We empirically observe the effective rank of the gradients increases
+        over time, which signals the inability to match performance with a single LoRA alone.
+    </p>
     <p>
         <center>
             <img class="rounded" src="./assets/erank.png" width="700px">
@@ -365,8 +381,10 @@ src: url("./fonts/Avenir_Book.ttf");
 
     <br>
     <p>
-      <b style="color: blue;">Observation 3</b>: Sequential merging, while a viable approach to recover the full-rank weight representation, is unable to recover the full-model pre-training performance in practice.
-        Suggesting the need for full-rank update iterates.</p>
+        <b style="color: blue;">Observation 3</b>: Sequential merging, while a viable approach to recover the full-rank
+        weight representation, is unable to recover the full-model pre-training performance in practice.
+        Suggesting the need for full-rank update iterates.
+    </p>
     </p>
     <p>
         <center>
@@ -375,8 +393,10 @@ src: url("./fonts/Avenir_Book.ttf");
     </p>
 
     <p>
-      <b style="color: blue;">Observation 4</b>: We demonstrate that parallel LoRA merging can precisely replicate the full-rank weight update.
-    Furthermore, we show that even with infrequent synchronization, our method remains effective for pre-training.</p>
+        <b style="color: blue;">Observation 4</b>: We demonstrate that parallel LoRA merging can precisely replicate the
+        full-rank weight update.
+        Furthermore, we show that even with infrequent synchronization, our method remains effective for pre-training.
+    </p>
     <center> Various datasets on ViT-S-32</center>
     <p>
         <center>
@@ -399,32 +419,44 @@ src: url("./fonts/Avenir_Book.ttf");
     </p>
 
     <p>
-      <b style="color: blue;">Observation 5</b>: Even when trained in parallel, LoRA heads maintain orthogonality throughout the training process.</p>
-        <center>
-            <img class="rounded" src="./assets/alignment.png" width="500px">
-        </center>
+        <b style="color: blue;">Observation 5</b>: Even when trained in parallel, LoRA heads maintain orthogonality
+        throughout the training process.
+    </p>
+    <center>
+        <img class="rounded" src="./assets/alignment.png" width="500px">
+    </center>
     </p>
     <br>
     <hr>
     <center>
         <h2> Conclusion, limitations, and implications </h2>
     </center>
-    <p>Our results suggest LTE is a competitive parameter-efficient framework for distributed training. We highlight several directions for further exploration:</p>
+    <p>Our results suggest LTE is a competitive parameter-efficient framework for distributed training. We highlight
+        several directions for further exploration:</p>
     <ul>
         <li>Improving convergence speed by integrating methods from federated learning and model averaging.</li>
         <li>Creating adaptive mechanisms for determining the necessary number of ranks or heads.</li>
-        <li>Examining the feasibility of heterogeneous parameterization for LoRA, allowing each adapter to operate at a distinct rank.</li>
-        <li>Investigating strategies for integrating multi-level optimization (optimizer at both local- and meta-level)</li>
+        <li>Examining the feasibility of heterogeneous parameterization for LoRA, allowing each adapter to operate at a
+            distinct rank.</li>
+        <li>Investigating strategies for integrating multi-level optimization (optimizer at both local- and meta-level)
+        </li>
     </ul>
-    <p>Our initial findings validate the potential of low-rank adapters in neural network training, marking a significant step forward. However, further testing on larger models is essential to test the scalability of our approach.
-    We believe our method opens up and contributes to many avenues:</p>
+    <p>Our initial findings validate the potential of low-rank adapters in neural network training, marking a
+        significant step forward. However, further testing on larger models is essential to test the scalability of our
+        approach.
+        We believe our method opens up and contributes to many avenues:</p>
     <ul>
-        <li><b>Collective Intelligence:</b> Distributed learning can lead to more efficient and scalable knowledge acquisition.</li>
-        <li><b>Personalized Learning:</b> Each LoRA can serve as a localized learning, tailoring models to individual user preferences. These preferences can be shared or used to update the base model. </li>
-        <li><b>User Safety and Privacy:</b> Localized training ensures user's data safety and privacy, as weight updates are the main communication medium.</li>
-        <li><b>Computational Efficiency:</b> Pre-training models in environments with limited computational resources or slow interconnect speeds.</li>
+        <li><b>Collective Intelligence:</b> Distributed learning can lead to more efficient and scalable knowledge
+            acquisition.</li>
+        <li><b>Personalized Learning:</b> Each LoRA can serve as a localized learning, tailoring models to individual
+            user preferences. These preferences can be shared or used to update the base model. </li>
+        <li><b>User Safety and Privacy:</b> Localized training ensures user's data safety and privacy, as weight updates
+            are the main communication medium.</li>
+        <li><b>Computational Efficiency:</b> Pre-training models in environments with limited computational resources or
+            slow interconnect speeds.</li>
     </ul>
-    <p>Through addressing these open questions, we hope to envision a collaborative ecosystem embodying the concept of the "wisdom of the crowd." </p>
+    <p>Through addressing these open questions, we hope to envision a collaborative ecosystem embodying the concept of
+        the "wisdom of the crowd." </p>
 
     <br>
 
@@ -432,15 +464,16 @@ src: url("./fonts/Avenir_Book.ttf");
     <h3 style="margin-top: -1.6em;text-align:left"></h3>
 
 
-    <div style="background: #FFF1E5; overflow: auto; width: auto; border: none; padding: 1em 1em 0.0em 1em; max-width: 100%; border-radius: 10px;">
-    <pre style="font-size: 10pt; margin: 0; text-align: left; white-space: pre-wrap; word-wrap: break-word;">
-      @article{huh2024lte,
+    <div
+        style="background: #FFF1E5; overflow: auto; width: auto; border: none; padding: 1em 1em 0.0em 1em; max-width: 100%; border-radius: 10px;">
+        <pre style="font-size: 10pt; margin: 0; text-align: left; white-space: pre-wrap; word-wrap: break-word;">
+    @article{huh2024lte,
         title={Training Neural Networks from Scratch with Parallel Low-Rank Adapters},
-        author={Huh, Minyoung and Cheung, Brian and Bernstein, Jeremy
+        author={Huh, Minyoung and Cheung, Brian and Bernstein, Jeremy 
                 and Isola, Phillip and Agrawal, Pulkit},
-        journal={arXiv preprint},
+        journal={arXiv preprint arXiv:2402.16828},
         year={2024}
-      }
+    }
     </pre>
     </div>
 
@@ -452,15 +485,16 @@ src: url("./fonts/Avenir_Book.ttf");
     <center>
         <h2> Acknowledgements </h2>
     </center>
-        <p> JH was supported by the ONR MURI grant N00014-22-1-2740 and the MIT-IBM Watson AI Lab.
+    <p> JH was supported by the ONR MURI grant N00014-22-1-2740 and the MIT-IBM Watson AI Lab.
         JB was funded by the MIT-IBM Watson AI Lab and the Packard Fellowship.
         PI was funded by the Packard Fellowship.
         BC was funded by the NSF STC award CCF-1231216.
-        We thank Han Guo, Lucy Chai, Wei-Chiu Ma, Eunice Lee, Dave Epstein, and Yen-Chen Lin for their feedback and emotional support on the project. </p>
-        <br><br>
+        We thank Han Guo, Lucy Chai, Wei-Chiu Ma, Eunice Lee, Dave Epstein, and Yen-Chen Lin for their feedback and
+        emotional support on the project. </p>
+    <br><br>
 
-        <br><br>
-        <a href="https://richzhang.github.io/colorization/">Website template edited from Colorful Colorization</a>.
+    <br><br>
+    <a href="https://richzhang.github.io/colorization/">Website template edited from Colorful Colorization</a>.
     </p>
     <br>
 
