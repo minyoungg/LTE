@@ -121,8 +121,9 @@ Note: we do not support standalone parameters, so wrap it as a module to replica
 If you found the library useful, please consider citing
 ```bibtex
 @article{huh2024lte,
-  title={Training Neural Networks from Scratch with Parallel Low-Rank Adapters},
-  author={Huh, Minyoung and Cheung, Brian and Bernstein, Jeremy and Agrawal, Pulkit and Isola, Phillip},
-  journal={arXiv preprint arXiv},
+      title={Training Neural Networks from Scratch with Parallel Low-Rank Adapters},
+      author={Huh, Minyoung and Cheung, Brian and Bernstein, Jeremy and Isola, Phillip and Agrawal, Pulkit},
+      journal={arXiv preprint arXiv:2402.16828},
+      year={2024}
 }
 ```
